@@ -1,1 +1,53 @@
-r
+import capos.*
+
+test "rolando agarra espada y libro" {
+    rolando.levantar(espadaDelDestino)
+    rolando.levantar(libroDeHechizos)
+    rolando.levantar(collarDivino)
+
+    assert.equals(2, rolando.artefactos().size())
+}
+
+test "rolando con el castillo" {
+    rolando.levantar(espadaDelDestino)
+    rolando.levantar(libroDeHechizos)
+
+    rolando.vaciarEn(castilloDePiedra)
+
+    rolando.levantar(collarDivino)
+
+    rolando.vaciarEn(castilloDePiedra)
+
+    assert.equals(0, rolando.artefactos().size())
+    assert.equals(3, castilloDePiedra.artefactosGuardados().size())
+}
+
+test "castillo con collar y espada, y Rolando con armadura" {
+    rolando.levantar(collarDivino)
+    rolando.levantar(espadaDelDestino)
+
+    rolando.vaciarEn(castilloDePiedra)
+
+    rolando.levantar(armaduraValyria)
+
+    assert.that(rolando.esArtefacto(collarDivino))
+    assert.that(rolando.esArtefacto(espadaDelDestino))
+    assert.that(rolando.esArtefacto(armaduraValyria))
+
+    assert.notThat(rolando.esArtefacto(libroDeHechizos))
+}
+
+test "encuentros" {
+    rolando.levantar(espadaDelDestino)
+    rolando.levantar(libroDeHechizos)    
+    rolando.levantar(collarDivino)
+
+    rolando.vaciarEn(castilloDePiedra)
+
+    rolando.levantar(armaduraValyria)      
+    rolando.levantar(collarDivino)  
+
+    assert.equals([espadaDelDestino, libroDeHechizos, collarDivino, armaduraValyria, collarDivino]
+                  , rolando.encuentros())       
+
+}
