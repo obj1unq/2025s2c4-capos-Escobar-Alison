@@ -24,6 +24,7 @@ test "rolando con el castillo" {
 
 test "castillo con collar y espada, y Rolando con armadura" {
     rolando.levantar(collarDivino)
+    
     rolando.levantar(espadaDelDestino)
 
     rolando.vaciarEn(castilloDePiedra)
